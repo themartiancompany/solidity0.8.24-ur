@@ -164,7 +164,10 @@ _check_tag_latest() {
     recipe-get \
       "${_repo_dir}/PKGBUILD" \
       "pkgver" || \
-      true)"
+      true)-$(
+        recipe-get \
+          "${_repo_dir}/PKGBUILD" \
+          "pkgrel")"
   _tag_current="${_tag_recipe}"
   if [[ "${_tag}" != "${_tag_current}" ]]; then
     _msg=(
