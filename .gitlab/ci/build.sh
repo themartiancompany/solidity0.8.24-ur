@@ -139,6 +139,8 @@ _check_tag_latest() {
     _pkgname="${1}" \
     _msg=() \
     _tag \
+    _tag_build \
+    _tag_current \
     _tag_recipe \
     _repo_dir
   _repo_dir="/home/user/${_pkgname}"
@@ -156,17 +158,19 @@ _check_tag_latest() {
       tail \
         -n \
           1)"
-  if [[ "${_tag}" == "[MASKED]" ]]; then
+  _tag_build="${tag}"
+  _tag_current="${_tag_build}"
+  if [[ "${_tag_repo}" == "[MASKED]" ]]; then
     _tag_recipe="$(
       recipe-get \
         "${_repo_dir}/PKGBUILD" \
         "pkgver" || \
         true)"
-    _tag="${_tag_recipe}"
+    _tag_current="${_tag_recipe}"
   fi
-  if [[ "${_tag}" != "${tag}" ]]; then
+  if [[ "${_tag}" != "${_tag_current}" ]]; then
     _msg=(
-      "Current build tag '${tag}',"
+      "Current build tag '${_tag_current}',"
       "latest tag '${_tag}'."
     )
     echo \
