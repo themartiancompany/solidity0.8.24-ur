@@ -186,6 +186,7 @@ _requirements() {
     _fur_mini_opts=() \
     _fur_opts=() \
     _pkgname \
+    _pkgver \
     _commit \
     _docs_commit \
     _git_http \
@@ -373,13 +374,18 @@ _requirements() {
       recipe-get \
         "/home/user/${_pkgname}/PKGBUILD" \
         "_commit")"
+    _pkgver="$(
+      recipe-get \
+        "/home/user/${_pkgname}/PKGBUILD" \
+        "pkgver" || \
+        true)"
     _gl_dl_mini \
       "${ns}" \
       "${_pkgname}" \
       "${_commit}"
     mv \
       "${HOME}/${_pkgname}-${_commit}.tar.gz" \
-      "/home/user/${_pkgname}"
+      "/home/user/${_pkgname}/${_pkgname%${_pkgver}}-${_commit}.tar.gz"
   fi || \
   true
 }
