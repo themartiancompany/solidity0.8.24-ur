@@ -215,7 +215,9 @@ if [[ ! -v "_ns" ]]; then
     _ns="argotorg"
   fi
 fi
-if [[ "${_ns}" == "themartiancompany" ]]; then
+if [[ "${_ns}" == "argotorg" ]]; then
+  _commit="${_0_8_24_commit}"
+else
   if [[ "${_boost_oldest}" == "1.89" ]]; then
     if [[ "${_evmfs}" == "true" ]]; then
       _commit="${_bundle_commit}"
@@ -223,8 +225,6 @@ if [[ "${_ns}" == "themartiancompany" ]]; then
       _commit="${_0_8_24_1_commit}"
     fi
   fi
-elif [[ "${_ns}" == "argotorg" ]]; then
-  _commit="${_0_8_24_commit}"
 fi
 _http="https://${_git_http}.com"
 url="${_http}/${_ns}/${_pkg}"
@@ -338,9 +338,9 @@ elif [[ "${_evmfs}" == "false" ]]; then
     if [[ "${_git_service}" == "github" ]]; then
       _sum="${_github_sum}"
       _sig_sum="${_github_sig_sum}"
-      elif [[ "${_git_service}" == "gitlab" ]]; then
-        _sum="${_gitlab_sum}"
-        _sig_sum="${_gitlab_sig_sum}"
+    elif [[ "${_git_service}" == "gitlab" ]]; then
+      _sum="${_gitlab_sum}"
+      _sig_sum="${_gitlab_sig_sum}"
     fi
   fi
 fi
