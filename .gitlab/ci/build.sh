@@ -160,7 +160,7 @@ _check_tag_latest() {
           1)"
   _tag_build="${tag}"
   _tag_current="${_tag_build}"
-  if [[ "${_tag_repo}" == "[MASKED]" ]]; then
+  if [[ "${_tag_build}" == "[MASKED]" ]]; then
     _tag_recipe="$(
       recipe-get \
         "${_repo_dir}/PKGBUILD" \
