@@ -381,10 +381,10 @@ _requirements() {
         true)"
     _gl_dl_mini \
       "${ns}" \
-      "${_pkgname}" \
+      "${_pkgname%${_pkgver}}" \
       "${_commit}"
     mv \
-      "${HOME}/${_pkgname}-${_commit}.tar.gz" \
+      "${HOME}/${_pkgname%${_pkgver}}-${_commit}.tar.gz" \
       "/home/user/${_pkgname}/${_pkgname%${_pkgver}}-${_commit}.tar.gz"
   fi || \
   true

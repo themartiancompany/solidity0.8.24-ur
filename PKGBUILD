@@ -186,7 +186,7 @@ pkgname=(
 _0_8_24_commit="e11b9ed9f2c254bc894d844c0a64a0eb76bbb4fd"
 _bundle_commit="142aa62e6805505b6a06cbeeec530f5c8bf0bfdd"
 _0_8_24_1_commit="2ef4bfe420c655abbebc4d0d2948e95ca5ca9547"
-pkgrel=6
+pkgrel=7
 pkgdesc="Smart contract programming language."
 arch=(
   "x86_64"
