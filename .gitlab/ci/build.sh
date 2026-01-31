@@ -162,6 +162,7 @@ _check_tag_latest() {
         "${_repo_dir}/PKGBUILD" \
         "pkgver" || \
         true)"
+    _tag="${_tag_recipe}"
   fi
   if [[ "${_tag}" != "${tag}" ]]; then
     _msg=(

@@ -570,6 +570,7 @@ _compile() {
       _cxxflags+=(
         -Wno-deprecated-declarations
       )
+  fi
   if [[ "${_compiler}" == "gcc" ]]; then
     _cxx_compiler="g++"
   elif [[ "${_compiler}" == "clang" ]]; then
@@ -633,8 +634,7 @@ _compile() {
     # "${srcdir}/build.log"
 }
 
-build()
-{
+build() {
   local \
     _tests_switch=() \
     _tests_switch_status
