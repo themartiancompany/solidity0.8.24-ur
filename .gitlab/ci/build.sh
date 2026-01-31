@@ -160,14 +160,12 @@ _check_tag_latest() {
           1)"
   _tag_build="${tag}"
   _tag_current="${_tag_build}"
-  if [[ "${_tag_build}" == "[MASKED]" ]]; then
-    _tag_recipe="$(
-      recipe-get \
-        "${_repo_dir}/PKGBUILD" \
-        "pkgver" || \
-        true)"
-    _tag_current="${_tag_recipe}"
-  fi
+  _tag_recipe="$(
+    recipe-get \
+      "${_repo_dir}/PKGBUILD" \
+      "pkgver" || \
+      true)"
+  _tag_current="${_tag_recipe}"
   if [[ "${_tag}" != "${_tag_current}" ]]; then
     _msg=(
       "Current build tag '${_tag_current}',"
