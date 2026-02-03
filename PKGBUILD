@@ -126,6 +126,22 @@ _boost_pkgver_get() {
   done
 }
 
+_verlte() {
+  printf \
+    '%s\n' \
+    "${1}" \
+    "${2}" |
+    sort \
+      -C \
+      -V
+}
+
+_verlt() {
+  ! _verlte \
+      "${2}" \
+      "${1}"
+}
+
 if [[ ! -v "_boost_pkgver" ]]; then
   _boost_pkgver_get
 fi
@@ -209,10 +225,10 @@ arch=(
 # later than 1.83 which are only published
 # on The Martian Company namespaces.
 if [[ ! -v "_ns" ]]; then
-  if [[ "${_boost_oldest}" == "1.89" ]]; then
-    _ns="themartiancompany"
-  elif [[ "${_boost_oldest}" != "1.89" ]]; then
+  if [[ "${_boost_oldest}" != "1.89" ]]; then
     _ns="argotorg"
+  elif [[ "${_boost_oldest}" == "1.89" ]]; then
+    _ns="themartiancompany"
   fi
 fi
 if [[ "${_ns}" == "argotorg" ]]; then
@@ -528,22 +544,6 @@ _bin_get() {
     "${_bin}"
 }
 
-_verlte() {
-  printf \
-    '%s\n' \
-    "${1}" \
-    "${2}" | \
-    sort \
-      -C \
-      -V
-}
-
-_verlt() {
-  ! _verlte \
-      "${2}" \
-      "${1}"
-}
-
 _compile() {
   local \
     _tests="${1}" \
@@ -625,6 +625,7 @@ _compile() {
   CC="${_cc}" \
   CXX="${_cxx}" \
   CXXFLAGS="${_cxxflags[*]}" \
+  VERBOSE=1 \
   cmake \
     -B \
       "${srcdir}/${_tarname}/build/" \
@@ -632,6 +633,7 @@ _compile() {
   CC="${_cc}" \
   CXX="${_cxx}" \
   CXXFLAGS="${_cxxflags[*]}" \
+  VERBOSE=1 \
   cmake \
     --build \
       "${srcdir}/${_tarname}/build/" # \
