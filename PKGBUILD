@@ -212,7 +212,7 @@ pkgname=(
 _0_8_24_commit="e11b9ed9f2c254bc894d844c0a64a0eb76bbb4fd"
 _bundle_commit="142aa62e6805505b6a06cbeeec530f5c8bf0bfdd"
 _0_8_24_1_commit="8285e540410fec23ac7569557637cd8b85c99ee8"
-pkgrel=15
+pkgrel=16
 pkgdesc="Smart contract programming language."
 arch=(
   "aarch64"
@@ -535,6 +535,13 @@ prepare() {
       "${_commit_hash}" > \
       "${srcdir}/${_tarname}/commit_hash.txt"
   fi
+  if [[ "${_os}" == "Android" ]]; then
+    sed \
+      -e \
+        "/-Wsign-conversion/-Wsign-conversion -Wno-unused-but-set-variable/g" \
+      -i \
+      "${srcdir}/${_tarname}/cmake/EthCompilerSettings.cmake"
+  fi
 }
 
 _bin_get() {
@@ -623,6 +630,8 @@ _compile() {
       USE_LD_GOLD="OFF"
     -D
       USE_SYSTEM_LIBRARIES="OFF"
+    -D
+      CMAKE_CXX_FLAGS="${_cxxflags[*]}"
     -S
       "${srcdir}/${_tarname}/"
     -Wno-dev
