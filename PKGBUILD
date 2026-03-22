@@ -190,7 +190,11 @@ if [[ ! -v "_archive_format" ]]; then
       _archive_format="git"
     fi
   elif [[ "${_git}" == "false" ]]; then
-    _archive_format="tar.gz"
+    if [[ "${_git_service}" == "github" ]]; then
+      _archive_format="zip"
+    elif [[ "${_git_service}" == "gitlab" ]]; then
+      _archive_format="tar.gz"
+    fi
   fi
 fi
 _pkg=solidity
@@ -327,8 +331,8 @@ _bundle_sum="77860b58f9d6c4a9a9cb1ceaae7ebe5d856f91f3ccd96f67d5ea6a019d79d1fb"
 _bundle_sig_sum="7f737e7a88fdb8e96b428974592def4bbdf5bf24656b12ac5af76084b7fca095"
 _0_8_24_1_sum="2d0ba39aa412a00c408e7fdb84dcbdd598af305c2f1a9b299cfd6bc86644f3de"
 _0_8_24_1_sig_sum="555bc9cd59886e1b75f35245889a07f985efc4815e3dd2332ea457e9b5b68e05"
-_github_sum="SKIP"
-_github_sig_sum="SKIP"
+_github_sum="80a0b6bad364c4bb21ce1acda3d00ab623eb859420e0c225846416dcab7bea4f"
+_github_sig_sum="f314773de7c680ae28657d88f26ec2d2f1b957f8752fe60888894654f3bef799"
 _gitlab_sum="SKIP"
 _gitlab_sig_sum="SKIP"
 _github_release_sum="def2ab7c877fcd16c81a166cdc5b99bfabcee7e8d505afcce816e9b1e451c61a"
