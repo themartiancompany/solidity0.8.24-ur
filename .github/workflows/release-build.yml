@@ -720,6 +720,7 @@ jobs:
           export \
             _pkgbase="$( \
               _evmfs="false" \
+              _git_service="github" \
               /entrypoint.sh \
                 recipe-get \
                   "PKGBUILD" \
@@ -727,6 +728,7 @@ jobs:
           export \
             _pkgname="$( \
               _evmfs="false" \
+              _git_service="github" \
               /entrypoint.sh \
                 recipe-get \
                   "PKGBUILD" \
@@ -829,13 +831,14 @@ jobs:
           Installs build dependencies.
         run: |
           _evmfs="false" \
-            recipe-get \
-              -o \
-                "array" \
-              -d \
-                " " \
-              "PKGBUILD" \
-              "makedepends" > \
+          _git_service="github" \
+          recipe-get \
+            -o \
+              "array" \
+            -d \
+              " " \
+            "PKGBUILD" \
+            "makedepends" > \
             "${HOME}/makedepends"
           for _pkg in $(cat "${HOME}/makedepends"); do \
             _depend_name="$( \
@@ -1996,6 +1999,7 @@ jobs:
               "makedepends" > \
             "${HOME}/makedepends"; \
           # ( _evmfs="false" \
+          #   _git_service="github" \
           #     recipe-get \
           #       -o \
           #         "array" \
