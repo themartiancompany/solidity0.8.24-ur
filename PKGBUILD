@@ -177,6 +177,8 @@ if [[ "${_os}" == "Android" ]]; then
   _compiler="clang"
 elif [[ "${_os}" == "GNU/Linux" ]]; then
   _compiler="gcc"
+else
+  _compiler="gcc"
 fi
 if [[ ! -v "_cmake_generator" ]]; then
   _cmake_generator="make"
@@ -206,7 +208,7 @@ pkgname=(
 _0_8_24_commit="e11b9ed9f2c254bc894d844c0a64a0eb76bbb4fd"
 _bundle_commit="142aa62e6805505b6a06cbeeec530f5c8bf0bfdd"
 _0_8_24_1_commit="8285e540410fec23ac7569557637cd8b85c99ee8"
-pkgrel=12
+pkgrel=13
 pkgdesc="Smart contract programming language."
 arch=(
   "x86_64"
@@ -262,6 +264,8 @@ if [[ "${_os}" == "Android" ]]; then
     "boost-static"
   )
 elif [[ "${_os}" == "GNU/Linux" ]]; then
+  _boost_pkgname="boost-libs"
+elif [[ "${_os}" == "Msys" ]]; then
   _boost_pkgname="boost-libs"
 fi
 depends=(
@@ -567,6 +571,7 @@ _compile() {
   if [[ "${_os}" == "Android" ]]; then
     _cxxflags+=(
       -Wno-unused-but-set-variable
+      -Wno-deprecated-literal-operator
     )
   fi
   if [[ "${_boost_oldest}" != "1.89" ]]; then
